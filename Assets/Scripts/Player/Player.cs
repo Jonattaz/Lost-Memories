@@ -92,8 +92,11 @@ public class Player : MonoBehaviour
     // Alt world
     public GameObject altWorld;
 
+    // GameObject do dialogo
+    public GameObject dialog;
 
-    bool v;
+    // Controla a mudança de mundo
+    bool worldControl;
 
     // Start is called before the first frame update
     void Start()
@@ -128,7 +131,7 @@ public class Player : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.M))
             {
                 StartCoroutine(WorldControl());
-                v = !v;
+                worldControl = !worldControl;
             }
 
 
@@ -210,8 +213,8 @@ public class Player : MonoBehaviour
    IEnumerator WorldControl()
     {
         yield return new WaitForSeconds(2);
-        altWorld.SetActive(v);
-        normalWolrd.SetActive(!v);
+        altWorld.SetActive(worldControl);
+        normalWolrd.SetActive(!worldControl);
     }
 
 
@@ -316,7 +319,22 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(TookDamage());
         }
-        
+
+        if (collision.CompareTag("Dialog")) 
+        {
+            
+            dialog.SetActive(true);
+            
+        }        
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Dialog")) 
+        {
+            dialog.SetActive(false);
+        }
+
     }
 
 

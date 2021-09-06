@@ -17,8 +17,6 @@ public class DisplayShop : MonoBehaviour
             shopPanel.SetActive(true);
         }
 
-
-
     }
 
 

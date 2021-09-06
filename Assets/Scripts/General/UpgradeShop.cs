@@ -120,8 +120,6 @@ public class UpgradeShop : MonoBehaviour
     {
         gameManager.coins -= coin;
         FindObjectOfType<UIManager>().UpdateCoinsUI();
-
-
     }
 
 }

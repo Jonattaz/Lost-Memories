@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class BomberFly : Enemy
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
    protected override void Update()
