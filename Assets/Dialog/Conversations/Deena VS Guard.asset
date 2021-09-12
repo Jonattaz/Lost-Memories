@@ -10,20 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 410766b47f10e534f94cc0503a3acf23, type: 3}
-  m_Name: Deena VS Vegetto
+  m_Name: Deena VS Guard
   m_EditorClassIdentifier: 
   speakerLeft: {fileID: 11400000, guid: 775e0e8fa85c8b047916bdf14e1712f2, type: 2}
   speakerRight: {fileID: 11400000, guid: d3c10678144e8044a8dddef7f6543716, type: 2}
   lines:
-  - character: {fileID: 11400000, guid: d3c10678144e8044a8dddef7f6543716, type: 2}
-    text: "Estou sentindo um poder de luta imenso, quem \xE9 voc\xEA?"
   - character: {fileID: 11400000, guid: 775e0e8fa85c8b047916bdf14e1712f2, type: 2}
-    text: "Eu sou aquela que n\xE3o foi aceita pelo c\xE9u e nem pelo inferno, Deena-Sama!!!\n"
+    text: 'Saia do meu caminho, preciso entrar para resolver algo muito importante.
+
+'
   - character: {fileID: 11400000, guid: d3c10678144e8044a8dddef7f6543716, type: 2}
-    text: Que tal uma luta?
+    text: "Me desculpa jovem mo\xE7a, mas apenas na sua cabe\xE7a que voc\xEA  ser\xE1
+      capaz de entrar nesta empresa.(Aperte M para ativar o mundo da mente).\n"
   - character: {fileID: 11400000, guid: 775e0e8fa85c8b047916bdf14e1712f2, type: 2}
-    text: Ok
-  - character: {fileID: 11400000, guid: 775e0e8fa85c8b047916bdf14e1712f2, type: 2}
-    text: "Voc\xEA j\xE1 est\xE1 morto"
-  - character: {fileID: 11400000, guid: d3c10678144e8044a8dddef7f6543716, type: 2}
-    text: O queeee?
+    text: 'Que seja.
+
+'

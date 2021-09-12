@@ -8,6 +8,10 @@ TagManager:
   - Coin
   - Dialog
   - NPC
+  - Bullet
+  - Switch
+  - GunBox
+  - Key
   layers:
   - Default
   - TransparentFX

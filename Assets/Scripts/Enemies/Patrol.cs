@@ -16,10 +16,12 @@ public class Patrol : Enemy
     // Variável que controla quando o Patrol irá atirar novamente
     private float nextFire;
 
+    // Controla se o enemy irá dar dano no jogador
+    public bool aggressive;
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -43,7 +45,7 @@ public class Patrol : Enemy
 
 
 
-        if (Mathf.Abs(targetDistance) < attackDistance && Time.time > nextFire)
+        if (Mathf.Abs(targetDistance) < attackDistance && Time.time > nextFire && aggressive)
         {
             anim.SetTrigger("Shooting");
             nextFire = Time.time + fireRate;

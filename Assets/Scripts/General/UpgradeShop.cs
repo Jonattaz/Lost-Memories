@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
+
 public class UpgradeShop : MonoBehaviour
 {
     // Referência todos os textos do painel de upgrade
@@ -69,6 +70,7 @@ public class UpgradeShop : MonoBehaviour
         if (gameManager.coins >= gameManager.upgradeCost)
         {
             gameManager.fireRate -= 0.1f;
+            gameManager.fireRate = Mathf.Round( gameManager.fireRate * 100f) / 100f;
             if (gameManager.fireRate <= 0)
             {
                 gameManager.fireRate = 0;
@@ -101,6 +103,7 @@ public class UpgradeShop : MonoBehaviour
         if (gameManager.coins >= gameManager.upgradeCost)
         {
             gameManager.reloadTime -= 0.1f;
+            gameManager.reloadTime = Mathf.Round(gameManager.reloadTime * 100f) / 100f;
 
             if (gameManager.reloadTime <= 0)
             {

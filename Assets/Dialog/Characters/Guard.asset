@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de1608cddf3ba5f40ae58cb5d5efb146, type: 3}
-  m_Name: Vegetto
+  m_Name: Guard
   m_EditorClassIdentifier: 
-  fullName: Vegetto
-  portrait: {fileID: 21300000, guid: fb0bf97a95b5a244793675c67163e4f4, type: 3}
+  fullName: Guarda
+  portrait: {fileID: 21300000, guid: 5a95e4f5e756fe14bb7aae66cf9b0104, type: 3}

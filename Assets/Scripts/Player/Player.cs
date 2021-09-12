@@ -98,9 +98,18 @@ public class Player : MonoBehaviour
     // Controla a mudança de mundo
     bool worldControl;
 
+    // Ativa a arma do jogador
+    private bool unlockGun;
+
+    // Controla se o jogador possui a chave ou não
+    [HideInInspector]
+    public bool key;
+
     // Start is called before the first frame update
     void Start()
     {
+        unlockGun = false;
+        key = false;
         rb = GetComponent<Rigidbody2D>();
         groundCheck = gameObject.transform.Find("GroundCheck");
         anim = GetComponent<Animator>();
@@ -148,7 +157,7 @@ public class Player : MonoBehaviour
             }
 
 
-            if (Input.GetKeyDown(KeyCode.F) && Time.time > nextFire && bullets > 0 && !reloading && canFire)
+            if (Input.GetKeyDown(KeyCode.F) && Time.time > nextFire && bullets > 0 && !reloading && canFire && unlockGun)
             {
                 nextFire = Time.time + fireRate;
                 anim.SetTrigger("Shoot");
@@ -212,7 +221,7 @@ public class Player : MonoBehaviour
 
    IEnumerator WorldControl()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         altWorld.SetActive(worldControl);
         normalWolrd.SetActive(!worldControl);
     }
@@ -325,7 +334,21 @@ public class Player : MonoBehaviour
             
             dialog.SetActive(true);
             
-        }        
+        }
+
+        if (collision.CompareTag("GunBox"))
+        {
+            unlockGun = true;
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.CompareTag("Key")) 
+        {
+            key = true;
+            Destroy(collision.gameObject);
+        
+        }
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -334,7 +357,6 @@ public class Player : MonoBehaviour
         {
             dialog.SetActive(false);
         }
-
     }
 
 
