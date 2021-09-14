@@ -105,6 +105,9 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public bool key;
 
+    // Controla se o jogador está num dialogo ou não
+    public bool talking;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -127,8 +130,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isDead)
+        if (!isDead && !talking)
         {
+            anim.gameObject.GetComponent<Animator>().enabled = true;
             onGround = Physics2D.Linecast(transform.position, groundCheck.position, 
                 1 << LayerMask.NameToLayer("Ground"));
 
@@ -137,7 +141,7 @@ public class Player : MonoBehaviour
                 anim.SetBool("Jump", false);
             }
 
-            if (Input.GetKeyDown(KeyCode.M))
+            if (Input.GetKeyDown(KeyCode.X))
             {
                 StartCoroutine(WorldControl());
                 worldControl = !worldControl;
@@ -157,7 +161,7 @@ public class Player : MonoBehaviour
             }
 
 
-            if (Input.GetKeyDown(KeyCode.F) && Time.time > nextFire && bullets > 0 && !reloading && canFire && unlockGun)
+            if (Input.GetKeyDown(KeyCode.Z) && Time.time > nextFire && bullets > 0 && !reloading && canFire && unlockGun)
             {
                 nextFire = Time.time + fireRate;
                 anim.SetTrigger("Shoot");
@@ -179,7 +183,7 @@ public class Player : MonoBehaviour
                 UpdateBulletsUI();
 
             }
-            else if(Input.GetKeyDown(KeyCode.F) && bullets <= 0 && onGround)
+            else if(Input.GetKeyDown(KeyCode.Z) && bullets <= 0 && onGround)
             {
                 StartCoroutine(Reloading());
             }
@@ -190,12 +194,12 @@ public class Player : MonoBehaviour
             anim.SetBool("LookingUp", lookingUp);
             anim.SetBool("Crouched", crouched);
 
-            if (Input.GetButtonDown("Reload"))
+            if (Input.GetKeyDown(KeyCode.C))
             {
                 StartCoroutine(Reloading());
             }
 
-            if (Input.GetKeyDown(KeyCode.G) && bombs > 0)
+            if (Input.GetKeyDown(KeyCode.LeftShift) && bombs > 0)
             {
                 Rigidbody2D tempBomb = Instantiate(bombRb, transform.position, transform.rotation);
                 if(facinRight)
@@ -217,6 +221,10 @@ public class Player : MonoBehaviour
             }
 
         }
+        else
+        {
+            anim.gameObject.GetComponent<Animator>().enabled = false;
+        }
     }
 
    IEnumerator WorldControl()
@@ -229,9 +237,11 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isDead)
+        if (!isDead && !talking)
         {
-            if(!crouched && !lookingUp && !reloading)
+
+            anim.gameObject.GetComponent<Animator>().enabled = true;
+            if (!crouched && !lookingUp && !reloading)
             {
                 hForce = Input.GetAxisRaw("Horizontal");
             }
@@ -256,6 +266,10 @@ public class Player : MonoBehaviour
             }
 
 
+        }
+        else
+        {
+            anim.gameObject.GetComponent<Animator>().enabled = false;
         }
 
     }
@@ -331,9 +345,7 @@ public class Player : MonoBehaviour
 
         if (collision.CompareTag("Dialog")) 
         {
-            
             dialog.SetActive(true);
-            
         }
 
         if (collision.CompareTag("GunBox"))
@@ -421,8 +433,6 @@ public class Player : MonoBehaviour
         UpdateHealthUI();
 
     }
-
-
 
 }
 

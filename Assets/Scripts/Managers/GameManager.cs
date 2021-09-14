@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -47,6 +48,22 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         
     }
+
+
+    // Carrega outra cena 
+    public void LoadScene(int scene) 
+    {
+        SceneManager.LoadScene(scene);
+    }
+
+    // Permite o jogador sair do jogo
+    public void ExitGame() 
+    {
+        Application.Quit();
+       
+    }
+
+
 
 }
 

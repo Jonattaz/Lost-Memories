@@ -16,6 +16,12 @@ public class DialogDisplay : MonoBehaviour
 
     private int activeLineIndex = 0;
 
+    // Script player
+    private Player playerScript;
+
+    // GameObject player
+    private GameObject player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,12 +30,16 @@ public class DialogDisplay : MonoBehaviour
 
         speakerUILeft.Speaker = conversation.speakerLeft;
         speakerUIRight.Speaker = conversation.speakerRight;
+
+        player = GameObject.Find("Player");
+        playerScript = player.GetComponent<Player>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return)) 
+        if (Input.GetKeyDown(KeyCode.LeftControl)) 
         {
             AdvanceConversation();
         
@@ -42,6 +52,7 @@ public class DialogDisplay : MonoBehaviour
     {
         if (activeLineIndex < conversation.lines.Length) 
         {
+            playerScript.talking = true;
             DisplayLine();
             activeLineIndex += 1;
         }
@@ -50,6 +61,7 @@ public class DialogDisplay : MonoBehaviour
             speakerUILeft.Hide();
             speakerUIRight.Hide();
             activeLineIndex = 0;
+            playerScript.talking = false;
         }
     }
 
