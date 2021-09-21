@@ -12,6 +12,7 @@ TagManager:
   - Switch
   - GunBox
   - Key
+  - LightConsole
   layers:
   - Default
   - TransparentFX

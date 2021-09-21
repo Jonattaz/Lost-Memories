@@ -86,17 +86,14 @@ public class Player : MonoBehaviour
     // Representa o gameManager
     GameManager gameManager;
 
-    // Normal World
-    public GameObject normalWolrd;
+    // Faz referência ao objeto da point light
+    public GameObject pointLight;
 
-    // Alt world
-    public GameObject altWorld;
+    // Faz referência ao objeto da global light
+    public GameObject globalLight;
 
     // GameObject do dialogo
     public GameObject dialog;
-
-    // Controla a mudança de mundo
-    bool worldControl;
 
     // Ativa a arma do jogador
     private bool unlockGun;
@@ -105,12 +102,16 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public bool key;
 
+    // Controla se o jogador entrou em contato com o console de luz
+    private bool lightControl;
+
     // Controla se o jogador está num dialogo ou não
     public bool talking;
 
     // Start is called before the first frame update
     void Start()
     {
+
         unlockGun = false;
         key = false;
         rb = GetComponent<Rigidbody2D>();
@@ -130,6 +131,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (!isDead && !talking)
         {
             anim.gameObject.GetComponent<Animator>().enabled = true;
@@ -141,10 +143,10 @@ public class Player : MonoBehaviour
                 anim.SetBool("Jump", false);
             }
 
-            if (Input.GetKeyDown(KeyCode.X))
+            if (Input.GetKeyDown(KeyCode.X) && lightControl)
             {
-                StartCoroutine(WorldControl());
-                worldControl = !worldControl;
+                globalLight.SetActive(true);
+                pointLight.SetActive(false);
             }
 
 
@@ -226,14 +228,6 @@ public class Player : MonoBehaviour
             anim.gameObject.GetComponent<Animator>().enabled = false;
         }
     }
-
-   IEnumerator WorldControl()
-    {
-        yield return new WaitForSeconds(1);
-        altWorld.SetActive(worldControl);
-        normalWolrd.SetActive(!worldControl);
-    }
-
 
     private void FixedUpdate()
     {
@@ -361,6 +355,12 @@ public class Player : MonoBehaviour
         
         }
 
+        if (collision.CompareTag("LightConsole")) 
+        {
+            lightControl = true;
+        
+        }
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -369,6 +369,14 @@ public class Player : MonoBehaviour
         {
             dialog.SetActive(false);
         }
+
+        if (collision.CompareTag("LightConsole"))
+        {
+            lightControl = false;
+
+        }
+
+
     }
 
 
