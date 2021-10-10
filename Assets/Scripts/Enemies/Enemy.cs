@@ -10,6 +10,9 @@ public class Enemy : MonoBehaviour
     // Variável que representa a velocidade
     public float speed;
 
+    // Váriavel que controla se o inimigo irá atacar ou não
+    public static bool attack;
+
     // Variável que representa a distância dos ataques
     public float attackDistance;
 

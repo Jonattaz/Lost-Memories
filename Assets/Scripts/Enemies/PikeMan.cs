@@ -11,7 +11,7 @@ public class PikeMan : Enemy
     private bool walk;
 
     // Controla o estado do ataque/ true = está atacando. false = não está
-    private bool attack = false;
+    private bool pikeAttack = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +23,7 @@ public class PikeMan : Enemy
     {
         base.Update();
         anim.SetBool("Walk", walk);
-        anim.SetBool("Attack", attack);
+        anim.SetBool("Attack", pikeAttack);
 
         if (Mathf.Abs(targetDistance) < walkDistance)
         {
@@ -32,7 +32,7 @@ public class PikeMan : Enemy
 
         if (Mathf.Abs(targetDistance) < attackDistance)
         {
-            attack = true;
+            pikeAttack = true;
             walk = false;
         }
 
@@ -40,7 +40,7 @@ public class PikeMan : Enemy
 
     private void FixedUpdate()
     {
-        if (walk && !attack)
+        if (walk && !pikeAttack)
         {
             if (targetDistance  < 0)
             {
@@ -64,7 +64,7 @@ public class PikeMan : Enemy
     // Método que controla o estado do ataque, para que não fique atacando direto
     public void ResetAttack()
     {
-        attack = false;
+        pikeAttack = false;
 
 
     }

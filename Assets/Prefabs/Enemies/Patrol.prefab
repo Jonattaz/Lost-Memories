@@ -136,7 +136,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &7044711769591054302
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -204,3 +204,4 @@ MonoBehaviour:
     type: 3}
   fireRate: 5
   shotSpawner: {fileID: 7044711768979472842}
+  agressive: 0

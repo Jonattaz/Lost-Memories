@@ -86,12 +86,6 @@ public class Player : MonoBehaviour
     // Representa o gameManager
     GameManager gameManager;
 
-    // Faz referência ao objeto da point light
-    public GameObject pointLight;
-
-    // Faz referência ao objeto da global light
-    public GameObject globalLight;
-
     // GameObject do dialogo
     public GameObject dialog;
 
@@ -101,9 +95,6 @@ public class Player : MonoBehaviour
     // Controla se o jogador possui a chave ou não
     [HideInInspector]
     public bool key;
-
-    // Controla se o jogador entrou em contato com o console de luz
-    private bool lightControl;
 
     // Controla se o jogador está num dialogo ou não
     public bool talking;
@@ -143,13 +134,7 @@ public class Player : MonoBehaviour
                 anim.SetBool("Jump", false);
             }
 
-            if (Input.GetKeyDown(KeyCode.X) && lightControl)
-            {
-                globalLight.SetActive(true);
-                pointLight.SetActive(false);
-            }
-
-
+        
             if (Input.GetButtonDown("Jump") && onGround && !reloading)
             {
                 jump = true;
@@ -355,12 +340,7 @@ public class Player : MonoBehaviour
         
         }
 
-        if (collision.CompareTag("LightConsole")) 
-        {
-            lightControl = true;
-        
-        }
-
+ 
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -369,14 +349,6 @@ public class Player : MonoBehaviour
         {
             dialog.SetActive(false);
         }
-
-        if (collision.CompareTag("LightConsole"))
-        {
-            lightControl = false;
-
-        }
-
-
     }
 
 

@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BomberFly : Enemy
+public class SecurityCam : Enemy
 {
-
+    
     // Update is called once per frame
-   protected override void Update()
+    protected override void Update()
     {
         base.Update();
 
         if (Mathf.Abs(targetDistance) < attackDistance)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+            attack = true;
         }
     }
+
 }

@@ -16,17 +16,32 @@ public class Patrol : Enemy
     // Variável que controla quando o Patrol irá atirar novamente
     private float nextFire;
 
-    // Controla se o enemy irá dar dano no jogador
-    public bool aggressive;
+    [SerializeField]
+    // Váriavel que controla se o patrol será agressivo ou não
+    private bool agressive;
+
+    float disToPlayer;
+
+    [SerializeField]
+    float agroRange;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        agressive = false;
+
     }
 
     // Update is called once per frame
     protected override void Update()
     {
+
+        // Distance to player
+        disToPlayer = Vector2.Distance(transform.position, target.position);
+
+
+
         base.Update();
         if (targetDistance < 0)
         {
@@ -45,11 +60,28 @@ public class Patrol : Enemy
 
 
 
-        if (Mathf.Abs(targetDistance) < attackDistance && Time.time > nextFire && aggressive)
+        if (attack || agressive)
         {
-            anim.SetTrigger("Shooting");
-            nextFire = Time.time + fireRate;
+            if (disToPlayer < agroRange)
+            {
+                ChasePlayer();
+            }
             
+            if (Mathf.Abs(targetDistance) < attackDistance && Time.time > nextFire)
+            {
+                if (attack)
+                {
+                    anim.SetTrigger("Shooting");
+                    nextFire = Time.time + fireRate;
+                }
+                if (agressive)
+                {
+                    anim.SetTrigger("Shooting");
+                    nextFire = Time.time + fireRate;
+
+                }
+
+            }
         }
 
     }
@@ -60,15 +92,32 @@ public class Patrol : Enemy
         GameObject tempBullet = Instantiate(bulletPrefab, shotSpawner.position, shotSpawner.rotation);
         if (!facingRight)
         {
-            tempBullet.transform.eulerAngles = new Vector3(0,0,180);
+            tempBullet.transform.eulerAngles = new Vector3(0, 0, 180);
 
         }
     }
 
 
+    void ChasePlayer()
+    {
 
+        if (transform.position.x < target.position.x)
+        {
+            // Enemy is to the left side of the player, so move right
+            rb.velocity = new Vector2(speed, 0);
+
+
+        }
+        else
+        {
+            // Enemy is to the right side of the player, so move left
+            rb.velocity = new Vector2(-speed, 0);
+ 
+        }
+
+
+    }
 }
-
 
 
 
