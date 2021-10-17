@@ -29,6 +29,9 @@ public class GameManager : MonoBehaviour
     // Variável que representa o custo para os upgrades do player
     public int upgradeCost;
 
+    // Variável que faz o boss não levar dano quando usa o escudo
+    public static bool bossShield;
+
     // Instância do game manager
     public static GameManager gameManager;
 

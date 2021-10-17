@@ -13,6 +13,8 @@ TagManager:
   - GunBox
   - Key
   - LightConsole
+  - Button
+  - Shield
   layers:
   - Default
   - TransparentFX

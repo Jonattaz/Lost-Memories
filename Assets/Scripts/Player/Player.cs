@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
 
     // Verifica para qual lado o jogador está virado
-    private bool facinRight = true;
+    private bool facingRight = true;
 
     // Variável para checar o pulo do jogador
     private bool jump;
@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
     private bool isDead = false;
 
     // Variável que representa o animator
-    private Animator anim;
+    //private Animator anim;
 
     // Variável que verifica se o jogador está agachado
     private bool crouched;
@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
         key = false;
         rb = GetComponent<Rigidbody2D>();
         groundCheck = gameObject.transform.Find("GroundCheck");
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
         gameManager = GameManager.gameManager;
 
         SetPlayerStatus();
@@ -125,13 +125,13 @@ public class Player : MonoBehaviour
 
         if (!isDead && !talking)
         {
-            anim.gameObject.GetComponent<Animator>().enabled = true;
+           // anim.gameObject.GetComponent<Animator>().enabled = true;
             onGround = Physics2D.Linecast(transform.position, groundCheck.position, 
                 1 << LayerMask.NameToLayer("Ground"));
 
             if (onGround)
             {
-                anim.SetBool("Jump", false);
+               // anim.SetBool("Jump", false);
             }
 
         
@@ -151,12 +151,12 @@ public class Player : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Z) && Time.time > nextFire && bullets > 0 && !reloading && canFire && unlockGun)
             {
                 nextFire = Time.time + fireRate;
-                anim.SetTrigger("Shoot");
+                //anim.SetTrigger("Shoot");
                 GameObject tempBullet = Instantiate(bulletPrefab, shotSpawner.position, shotSpawner.rotation);
-                if (!facinRight && !lookingUp)
+                if (!facingRight && !lookingUp)
                 {
                     tempBullet.transform.eulerAngles = new Vector3(0,0,180);
-                }else if (!facinRight && lookingUp)
+                }else if (!facingRight && lookingUp)
                 {
                     tempBullet.transform.eulerAngles = new Vector3(0,0,90);
                 }
@@ -178,8 +178,8 @@ public class Player : MonoBehaviour
             lookingUp = Input.GetButton("Up");
             crouched = Input.GetButton("Down");
 
-            anim.SetBool("LookingUp", lookingUp);
-            anim.SetBool("Crouched", crouched);
+            //anim.SetBool("LookingUp", lookingUp);
+            //anim.SetBool("Crouched", crouched);
 
             if (Input.GetKeyDown(KeyCode.C))
             {
@@ -189,10 +189,10 @@ public class Player : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.LeftShift) && bombs > 0)
             {
                 Rigidbody2D tempBomb = Instantiate(bombRb, transform.position, transform.rotation);
-                if(facinRight)
+                if(facingRight)
                 {
                     tempBomb.AddForce(new Vector2(8,10), ForceMode2D.Impulse);
-                }else if (!facinRight)
+                }else if (!facingRight)
                 {
                     tempBomb.AddForce(new Vector2(-8, 10), ForceMode2D.Impulse);
                 }
@@ -210,7 +210,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            anim.gameObject.GetComponent<Animator>().enabled = false;
+            //anim.gameObject.GetComponent<Animator>().enabled = false;
         }
     }
 
@@ -219,27 +219,27 @@ public class Player : MonoBehaviour
         if (!isDead && !talking)
         {
 
-            anim.gameObject.GetComponent<Animator>().enabled = true;
+            //anim.gameObject.GetComponent<Animator>().enabled = true;
             if (!crouched && !lookingUp && !reloading)
             {
                 hForce = Input.GetAxisRaw("Horizontal");
             }
             
-            anim.SetFloat("Speed", Mathf.Abs(hForce));
+            //anim.SetFloat("Speed", Mathf.Abs(hForce));
 
             rb.velocity = new Vector2(hForce * speed, rb.velocity.y);
-            if (hForce > 0 && !facinRight)
+            if (hForce > 0 && !facingRight)
             {
                 Flip();
 
-            }else if (hForce < 0 && facinRight )
+            }else if (hForce < 0 && facingRight )
             {
                 Flip();
             }
 
             if (jump)
             {
-                anim.SetBool("Jump", true);
+               // anim.SetBool("Jump", true);
                 jump = false;
                 rb.AddForce(Vector2.up * jumpForce);
             }
@@ -248,7 +248,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            anim.gameObject.GetComponent<Animator>().enabled = false;
+            //anim.gameObject.GetComponent<Animator>().enabled = false;
         }
 
     }
@@ -257,7 +257,7 @@ public class Player : MonoBehaviour
     // Método responsável pela ação de virar o personagem de acordo com o lado que ele for
     void Flip()
     {
-        facinRight = !facinRight;
+        facingRight = !facingRight;
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
@@ -285,11 +285,11 @@ public class Player : MonoBehaviour
    IEnumerator Reloading()
     {
         reloading = true;
-        anim.SetBool("Reloading", true);
+        //anim.SetBool("Reloading", true);
         yield return new WaitForSeconds(reloadTime);
         bullets = gameManager.bullets;
         reloading = false;
-        anim.SetBool("Reloading", false);
+        //anim.SetBool("Reloading", false);
         UpdateBulletsUI();
     }
 
@@ -363,8 +363,20 @@ public class Player : MonoBehaviour
             Destroy(collision.gameObject);
             gameManager.coins += 1;
             UpdateCoinsUI();
+        }else if (collision.gameObject.CompareTag("Shield") && !tookDamage)
+        {
+            StartCoroutine(TookDamage());
         }
+
     }
+
+
+    // Método para quando este objeto receber dano
+    public void TookDamage(int damage)
+    {
+        StartCoroutine(TookDamage());
+    }
+
 
     // Corrotina responsável pelo dano que o personagem leva
     IEnumerator TookDamage()
@@ -375,7 +387,7 @@ public class Player : MonoBehaviour
         if (health <= 0)
         {
             isDead = true;
-            anim.SetTrigger("Death");
+          //  anim.SetTrigger("Death");
             Invoke("ReloadScene", 2f);
         }
         else
