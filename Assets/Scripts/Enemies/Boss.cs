@@ -7,6 +7,10 @@ public class Boss : Enemy
     // Game object que representa o tiro do Patrol
     public GameObject bulletPrefab;
 
+    [SerializeField]
+    // Variável que armazena o gameObject dos lasers
+    GameObject Lasers;
+
     // Variável que representa a taxa de tiro do Patrol
     public float fireRate;
 
@@ -114,10 +118,12 @@ public class Boss : Enemy
 
     IEnumerator BerserkMode()
     {
+        Lasers.SetActive(true);
         shield.SetActive(true);
         attackMode = false;
         GameManager.bossShield = true;
         yield return new WaitForSeconds(30);
+        Lasers.SetActive(false);
         shield.SetActive(false);
         attackMode = true;
     }

@@ -41,22 +41,7 @@ public class Drone : Enemy
         base.Update();
 
         Movement();
-
-        if (targetDistance < 0)
-        {
-            if (!facingRight)
-            {
-                Flip();
-            }
-        }
-        else
-        {
-            if (facingRight)
-            {
-                Flip();
-            }
-        }
-
+        
     }
 
 
@@ -86,11 +71,21 @@ public class Drone : Enemy
             Transform goalPoint = points[nextID];
 
             // Flip the enemy transform to look into the point's direction
-            if (goalPoint.transform.position.x > transform.position.x)
-                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            if (goalPoint.transform.position.x >= transform.position.x )
+            {
+                if (!facingRight)
+                {
+                    Flip();
+                }
+            }
             else
-                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z) ;
+            {
+                if (facingRight)
+                {
+                    Flip();
+                }
 
+            } 
             // Move the enemy towards the goal point
             transform.position = Vector2.MoveTowards(transform.position,
                 goalPoint.position, patrolSpeed * Time.deltaTime);
@@ -118,13 +113,26 @@ public class Drone : Enemy
         {
             transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
 
+            if (targetDistance < 0)
+            {
+                if (!facingRight)
+                {
+                    Flip();
+                }
+            }
+            else
+            {
+                if (facingRight)
+                {
+                    Flip();
+                }
+            }
+
             if (Mathf.Abs(targetDistance) < attackDistance && Time.time > nextFire)
             {
-                if (attack)
-                {
                     Shooting();
                     nextFire = Time.time + fireRate;
-                }
+                
             }
 
         }

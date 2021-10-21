@@ -89,9 +89,6 @@ public class Player : MonoBehaviour
     // GameObject do dialogo
     public GameObject dialog;
 
-    // Ativa a arma do jogador
-    private bool unlockGun;
-
     // Controla se o jogador possui a chave ou não
     [HideInInspector]
     public bool key;
@@ -102,8 +99,6 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        unlockGun = false;
         key = false;
         rb = GetComponent<Rigidbody2D>();
         groundCheck = gameObject.transform.Find("GroundCheck");
@@ -148,7 +143,7 @@ public class Player : MonoBehaviour
             }
 
 
-            if (Input.GetKeyDown(KeyCode.Z) && Time.time > nextFire && bullets > 0 && !reloading && canFire && unlockGun)
+            if (Input.GetKeyDown(KeyCode.Z) && Time.time > nextFire && bullets > 0 && !reloading && canFire && GameManager.unlockGun)
             {
                 nextFire = Time.time + fireRate;
                 //anim.SetTrigger("Shoot");
@@ -329,7 +324,7 @@ public class Player : MonoBehaviour
 
         if (collision.CompareTag("GunBox"))
         {
-            unlockGun = true;
+            GameManager.unlockGun = true;
             Destroy(collision.gameObject);
         }
 

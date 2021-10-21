@@ -46,7 +46,7 @@ public class UIManager : MonoBehaviour
     // Método que atualiza o UI das moedas
     public void UpdateCoinsUI()
     {
-        // ESTÁ DANDO ERRO DE REFERÊNCIA NULA, NÃO É SEMPRE - OBSERVAR
+       
         coinsText.text = GameManager.gameManager.coins.ToString();
     }
 

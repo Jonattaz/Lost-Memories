@@ -84,7 +84,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 5
   speed: 0
-  attackDistance: 50
+  attackDistance: 5
   coin: {fileID: 1854709921300822193, guid: ab2980e50f0966d43876f75d0e6502bd, type: 3}
   deathAnimation: {fileID: 3488367775304295655, guid: 0ec19095db99d67488951cf4849aa43d,
     type: 3}
@@ -204,5 +204,5 @@ MonoBehaviour:
     type: 3}
   fireRate: 5
   shotSpawner: {fileID: 7044711768979472842}
-  agressive: 0
-  agroRange: 0
+  agressive: 1
+  agroRange: 5

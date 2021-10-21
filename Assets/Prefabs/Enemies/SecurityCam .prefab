@@ -98,4 +98,5 @@ MonoBehaviour:
   speed: 0
   attackDistance: 3
   coin: {fileID: 1854709921300822193, guid: ab2980e50f0966d43876f75d0e6502bd, type: 3}
-  deathAnimation: {fileID: 0}
+  deathAnimation: {fileID: 3488367775304295655, guid: 0ec19095db99d67488951cf4849aa43d,
+    type: 3}

@@ -33,12 +33,10 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (collision.gameObject.CompareTag("Shield"))
+        if (collision.gameObject.CompareTag("Shield") || collision.gameObject.CompareTag("Player"))
         {
             Destroy(this.gameObject);
         }
-
-        Destroy(gameObject);
     }
 
 }

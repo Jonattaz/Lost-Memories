@@ -42,34 +42,35 @@ public class TimerLaserScript : MonoBehaviour
         timerLaserCollider = GetComponent<BoxCollider2D>();
 
         //função para ligar o laser
-        EnableTimerLaser();
+       EnableTimerLaser();
     }
 
 
     void Update()
     {
-        //iniciando a contagem de quanto tempo o laser ficará ligado
-        currentTime -= 1 * Time.deltaTime;
+            timerLaserCollider.enabled = true;
+            //iniciando a contagem de quanto tempo o laser ficará ligado
+            currentTime -= 1 * Time.deltaTime;
 
-        
-        if (currentTime <= 0)
-        {
-            //com a contagem chegando a 0 o laser é desabilitado por essa função
-            DisableTimerLaser();
 
-            //começa a contagem do tempo em que ele ficará desligado
-            chargeTime -= 1 * Time.deltaTime;
+            if (currentTime <= 0)
+            {
+                //com a contagem chegando a 0 o laser é desabilitado por essa função
+                DisableTimerLaser();
 
-            if (chargeTime <= 0)
-            {      
-                //com a contagem chegando a 0 o laser é ligado novamente pela função
-                EnableTimerLaser();
+                //começa a contagem do tempo em que ele ficará desligado
+                chargeTime -= 1 * Time.deltaTime;
 
-                //os contadores são resetados para começar o processo novamente
-                currentTime = startTime;
-                chargeTime = startChargeTime;
-            }
-        }
+                if (chargeTime <= 0)
+                {
+                    //com a contagem chegando a 0 o laser é ligado novamente pela função
+                    EnableTimerLaser();
+
+                    //os contadores são resetados para começar o processo novamente
+                    currentTime = startTime;
+                    chargeTime = startChargeTime;
+                }
+            }   
     }
 
     public void EnableTimerLaser()

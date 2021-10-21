@@ -26,13 +26,7 @@ public class Patrol : Enemy
     float agroRange;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        agressive = false;
-
-    }
-
+ 
     // Update is called once per frame
     protected override void Update()
     {
@@ -69,18 +63,12 @@ public class Patrol : Enemy
             
             if (Mathf.Abs(targetDistance) < attackDistance && Time.time > nextFire)
             {
-                if (attack)
+                
                 {
                     anim.SetTrigger("Shooting");
                     nextFire = Time.time + fireRate;
                 }
-                if (agressive)
-                {
-                    anim.SetTrigger("Shooting");
-                    nextFire = Time.time + fireRate;
-
-                }
-
+             
             }
         }
 

@@ -214,11 +214,12 @@ MonoBehaviour:
     type: 3}
   bulletPrefab: {fileID: 4524713928194007714, guid: 8aec2b65a727c3a4ea4d11e2e1a22053,
     type: 3}
+  Lasers: {fileID: 0}
   fireRate: 5
   shotSpawner: {fileID: 9152652198103588150}
   bombRb: {fileID: 1464916078767554695, guid: 6b4f191c41f93414c90bbb5e4ebf1a1a, type: 3}
   shield: {fileID: 995943255}
-  timer: 30
+  timer: 10
 --- !u!61 &9152652197906216190
 BoxCollider2D:
   m_ObjectHideFlags: 0
