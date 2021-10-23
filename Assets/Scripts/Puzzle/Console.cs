@@ -18,10 +18,12 @@ public class Console : MonoBehaviour
         {
             globalLight.SetActive(true);
         }
+        if (Input.GetKeyUp(KeyCode.X)) 
+            lightControl = false;
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
@@ -30,15 +32,6 @@ public class Console : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("LightConsole"))
-        {
-            lightControl = false;
-
-        }
-
-    }
 
 }
 

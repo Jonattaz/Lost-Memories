@@ -27,6 +27,10 @@ public class Switch : MonoBehaviour
     // Controla se a plataforma está ligada ou não
     bool platformOn;
 
+    // Bools de controle
+    private bool active;
+    private bool sound;   
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,16 +45,39 @@ public class Switch : MonoBehaviour
         {
             Move();
         }
+
+        // Quando o jogador para de apertar a tecla o teleporte para
+        if (Input.GetKeyUp(KeyCode.X))
+        {
+            active = false;
+            if (sound)
+            {
+                //SoundManager.PlaySound("Teleport");
+                sound = false;
+            }
+
+        }
+
+        // Quando o botão é apertado o teleporte funciona
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            active = true;
+
+        }
+
+
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Bullet")) 
+        if (collision.gameObject.CompareTag("Player") && active)
         {
             spriteRend.color = Color.green;
             platformOn = true;
         }
     }
+        
+    
 
     // Controls the elevator movement
     void Move()

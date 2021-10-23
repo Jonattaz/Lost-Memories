@@ -23,6 +23,19 @@ public class Doors : MonoBehaviour
     GameManager gameManager;
 
 
+    // GameObject que representa para onde a porta leva o jogador
+    public GameObject[] doors;
+
+    //int que represta em qual porta o jogador irá aparecer 
+    public int doorID;
+
+    // bool
+    private bool active = false;
+    private bool sound = false;
+
+    //ARRUMAR O FATO QUE AS VEZES O BOTÃO NÃO FUNCIONA
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,22 +48,58 @@ public class Doors : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        // Quando o jogador para de apertar a tecla o teleporte para
+        if (Input.GetKeyUp(KeyCode.X))
+        {
+            active = false;
+            if (sound)
+            {
+                //SoundManager.PlaySound("Teleport");
+                sound = false;
+            }
+
+        }
+
+        // Quando o botão é apertado o teleporte funciona
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            active = true;
+
+        }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
-    {
+      {
         if (collision.collider && playerScript.key && !levelLoad)
         {
             GetComponent<BoxCollider2D>().enabled = false;
             spriteRend.color = Color.green;
-        }else if (collision.collider && playerScript.key) 
+        }else if (collision.collider && levelLoad) 
         {
-            gameManager.LoadScene(nextLevel);
+            gameManager.LoadScene(nextLevel); 
         
         }
+
+        
+      }   
+
+
+    // Controla o teleporte
+    IEnumerator Teleport()
+    {
+
+        yield return new WaitForSeconds(0.5f);
+        player.transform.position = new Vector2(doors[doorID].transform.position.x,
+            doors[doorID].transform.position.y);
+
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && active) StartCoroutine(Teleport());
+
+    }
 
 
 }
