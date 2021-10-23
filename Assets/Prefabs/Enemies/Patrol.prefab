@@ -194,8 +194,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ef52f1436d176458ca7e3d2cece9e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
-  speed: 0
+  health: 10
+  speed: 1.5
   attackDistance: 5
   coin: {fileID: 1854709921300822193, guid: ab2980e50f0966d43876f75d0e6502bd, type: 3}
   deathAnimation: {fileID: 3488367775304295655, guid: 0ec19095db99d67488951cf4849aa43d,

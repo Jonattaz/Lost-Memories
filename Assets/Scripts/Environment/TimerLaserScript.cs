@@ -18,9 +18,6 @@ public class TimerLaserScript : MonoBehaviour
     // collider da linha
     public BoxCollider2D timerLaserCollider;
 
-
-    // contador
-
     // Variavel para a quantidade de tempo que o laser ficará ligado
     public float startTime;
     

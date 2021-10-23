@@ -11,17 +11,22 @@ public class ButtonScript : MonoBehaviour
     bool interacao;
 
 
+    private void Update()
+    {
+
+        //Se a interação com o botão estiver disponivel e o jogador apertar X, é chamada a função pra desligar o laser
+        if (Input.GetKeyDown(KeyCode.X) && interacao)
+        {
+            DisableLaser();
+        }
+    }
+
+
     void OnTriggerEnter2D(Collider2D collider)
     {
         // quando a tag Player entra no trigger do botão a interacao fica disponivel
         if (collider.gameObject.CompareTag("Player")) interacao = true;
 
-
-        //Se a interação com o botão estiver disponivel e o jogador atirar, é chamada a função pra desligar o laser
-        if (interacao && collider.gameObject.CompareTag("Bullet"))
-        {
-            DisableLaser();
-        }
 
     }
 

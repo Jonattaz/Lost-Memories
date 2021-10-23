@@ -75,14 +75,17 @@ public class Doors : MonoBehaviour
         {
             GetComponent<BoxCollider2D>().enabled = false;
             spriteRend.color = Color.green;
-        }else if (collision.collider && levelLoad) 
+            playerScript.key = false;
+        }
+        
+        if (collision.collider && levelLoad) 
         {
-            gameManager.LoadScene(nextLevel); 
+            gameManager.LoadScene(nextLevel);
+            levelLoad = false;
         
         }
-
-        
-      }   
+    
+    }   
 
 
     // Controla o teleporte

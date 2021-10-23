@@ -35,7 +35,6 @@ public class Switch : MonoBehaviour
     void Start()
     {
         spriteRend = GetComponent<SpriteRenderer>();
-        platformOn = false;
     }
 
     // Update is called once per frame

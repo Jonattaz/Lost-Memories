@@ -86,6 +86,9 @@ public class Player : MonoBehaviour
     // Representa o gameManager
     GameManager gameManager;
 
+
+    int damage;
+
     // GameObject do dialogo
     public GameObject dialog;
 
@@ -95,6 +98,7 @@ public class Player : MonoBehaviour
 
     // Controla se o jogador está num dialogo ou não
     public bool talking;
+
 
     // Start is called before the first frame update
     void Start()
@@ -351,7 +355,7 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy") && !tookDamage)
         {
-            StartCoroutine(TookDamage());
+            TookDamage(1);  
         }
         else if(collision.gameObject.CompareTag("Coin"))
         {
@@ -360,15 +364,16 @@ public class Player : MonoBehaviour
             UpdateCoinsUI();
         }else if (collision.gameObject.CompareTag("Shield") && !tookDamage)
         {
-            StartCoroutine(TookDamage());
+           TookDamage(1);
         }
 
     }
 
 
     // Método para quando este objeto receber dano
-    public void TookDamage(int damage)
+    public void TookDamage(int damageEnemy)
     {
+        damage = damageEnemy;
         StartCoroutine(TookDamage());
     }
 
@@ -377,7 +382,7 @@ public class Player : MonoBehaviour
     IEnumerator TookDamage()
     {
         tookDamage = true;
-        health--;
+        health -= damage;
         UpdateHealthUI();
         if (health <= 0)
         {

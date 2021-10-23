@@ -29,11 +29,12 @@ public class Drone : Enemy
     public float patrolSpeed = 2;
 
 
+    bool rangeCheck;
+
     private void Start()
     {
         attack = false;
     }
-
 
     // Update is called once per frame
     protected override void Update()
@@ -41,7 +42,7 @@ public class Drone : Enemy
         base.Update();
 
         Movement();
-        
+
     }
 
 
@@ -111,7 +112,12 @@ public class Drone : Enemy
 
         if (attack)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+            if (Mathf.Abs(targetDistance) < attackDistance)
+                rangeCheck = true;
+
+            if(rangeCheck)
+                transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+
 
             if (targetDistance < 0)
             {
@@ -128,7 +134,7 @@ public class Drone : Enemy
                 }
             }
 
-            if (Mathf.Abs(targetDistance) < attackDistance && Time.time > nextFire)
+            if (Time.time > nextFire)
             {
                     Shooting();
                     nextFire = Time.time + fireRate;
