@@ -27,6 +27,9 @@ public class Boss : Enemy
     // Variável que representa o objeto do escudo
     GameObject shield;
 
+    [SerializeField]
+    // Musica que toca na bossBattle
+    private AudioClip bossSoundtrack;
 
     // Modo de ataque do boss. False = BerserkMode. True = pistola e granada
     bool attackMode;
@@ -38,6 +41,7 @@ public class Boss : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        AudioManager.Instance.PlayMusic(bossSoundtrack);
         attackMode = true;
         timer = 30;
     }

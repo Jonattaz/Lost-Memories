@@ -35,10 +35,11 @@ public class GameManager : MonoBehaviour
     // Instância do game manager
     public static GameManager gameManager;
 
+    //Cheat Controller
+    public static bool cheat = false;
+
     // Ativa a arma do jogador
     public static bool unlockGun;
-
-
 
     // Start is called before the first frame update
     void Awake()

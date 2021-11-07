@@ -219,6 +219,7 @@ MonoBehaviour:
   shotSpawner: {fileID: 9152652198103588150}
   bombRb: {fileID: 1464916078767554695, guid: 6b4f191c41f93414c90bbb5e4ebf1a1a, type: 3}
   shield: {fileID: 995943255}
+  bossSoundtrack: {fileID: 8300000, guid: d9fcb913d1fa8054baf2fbc027238337, type: 3}
   timer: 10
 --- !u!61 &9152652197906216190
 BoxCollider2D:

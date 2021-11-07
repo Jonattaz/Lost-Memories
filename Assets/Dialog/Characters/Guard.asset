@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Guard
   m_EditorClassIdentifier: 
   fullName: Guarda
-  portrait: {fileID: 21300000, guid: 5a95e4f5e756fe14bb7aae66cf9b0104, type: 3}
+  portrait: {fileID: -315179316538839225, guid: 75939b7bdc7a7714f8b84b29de4f2466,
+    type: 3}

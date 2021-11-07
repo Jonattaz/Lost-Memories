@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
     private bool isDead = false;
 
     // Variável que representa o animator
-    //private Animator anim;
+    private Animator anim;
 
     // Variável que verifica se o jogador está agachado
     private bool crouched;
@@ -100,13 +100,14 @@ public class Player : MonoBehaviour
     public bool talking;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
         key = false;
         rb = GetComponent<Rigidbody2D>();
         groundCheck = gameObject.transform.Find("GroundCheck");
-        //anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         gameManager = GameManager.gameManager;
 
         SetPlayerStatus();
@@ -124,13 +125,13 @@ public class Player : MonoBehaviour
 
         if (!isDead && !talking)
         {
-           // anim.gameObject.GetComponent<Animator>().enabled = true;
+           anim.gameObject.GetComponent<Animator>().enabled = true;
             onGround = Physics2D.Linecast(transform.position, groundCheck.position, 
                 1 << LayerMask.NameToLayer("Ground"));
 
             if (onGround)
             {
-               // anim.SetBool("Jump", false);
+               anim.SetBool("Jump", false);
             }
 
         
@@ -174,13 +175,7 @@ public class Player : MonoBehaviour
                 StartCoroutine(Reloading());
             }
 
-            lookingUp = Input.GetButton("Up");
-            crouched = Input.GetButton("Down");
-
-            //anim.SetBool("LookingUp", lookingUp);
-            //anim.SetBool("Crouched", crouched);
-
-            if (Input.GetKeyDown(KeyCode.C))
+            if (Input.GetKeyDown(KeyCode.C) && GameManager.unlockGun)
             {
                 StartCoroutine(Reloading());
             }
@@ -209,7 +204,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            //anim.gameObject.GetComponent<Animator>().enabled = false;
+            anim.gameObject.GetComponent<Animator>().enabled = false;
         }
     }
 
@@ -218,14 +213,14 @@ public class Player : MonoBehaviour
         if (!isDead && !talking)
         {
 
-            //anim.gameObject.GetComponent<Animator>().enabled = true;
+            anim.gameObject.GetComponent<Animator>().enabled = true;
             if (!crouched && !lookingUp && !reloading)
             {
                 hForce = Input.GetAxisRaw("Horizontal");
+                anim.SetFloat("Speed", Mathf.Abs(hForce));
             }
             
-            //anim.SetFloat("Speed", Mathf.Abs(hForce));
-
+               
             rb.velocity = new Vector2(hForce * speed, rb.velocity.y);
             if (hForce > 0 && !facingRight)
             {
@@ -238,7 +233,7 @@ public class Player : MonoBehaviour
 
             if (jump)
             {
-               // anim.SetBool("Jump", true);
+                anim.SetBool("Jump", true);
                 jump = false;
                 rb.AddForce(Vector2.up * jumpForce);
             }
@@ -247,7 +242,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            //anim.gameObject.GetComponent<Animator>().enabled = false;
+            anim.gameObject.GetComponent<Animator>().enabled = false;
         }
 
     }
