@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 8455666653504050951}
   - component: {fileID: 8455666653504050949}
   - component: {fileID: 8455666653504050948}
+  - component: {fileID: 272760769}
   m_Layer: 10
   m_Name: Drone
   m_TagString: Enemy
@@ -126,7 +127,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.14303666, y: 0.051490933}
@@ -196,7 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   speed: 1.5
-  attackDistance: 5
+  attackDistance: 2
   coin: {fileID: 1854709921300822193, guid: ab2980e50f0966d43876f75d0e6502bd, type: 3}
   deathAnimation: {fileID: 3488367775304295655, guid: 0ec19095db99d67488951cf4849aa43d,
     type: 3}
@@ -209,3 +210,29 @@ MonoBehaviour:
   - {fileID: 0}
   nextID: 0
   patrolSpeed: 1
+--- !u!61 &272760769
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8455666653504050946}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.14303666, y: 0.051490933}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.68, y: 1.36}
+    newSize: {x: 1.68, y: 1.36}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.80444276, y: 1.0468757}
+  m_EdgeRadius: 0

@@ -15,6 +15,7 @@ TagManager:
   - LightConsole
   - Button
   - Shield
+  - Destruct
   layers:
   - Default
   - TransparentFX

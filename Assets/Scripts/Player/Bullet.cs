@@ -24,6 +24,9 @@ public class Bullet : MonoBehaviour
         
     }
 
+
+    
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Enemy otherEnemy = collision.GetComponent<Enemy>();
@@ -45,6 +48,12 @@ public class Bullet : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+        if (collision.CompareTag("Destruct"))
+        {
+            Destroy(this.gameObject);   
+        }
+
+        Destroy(gameObject, 3f);
     }
 
 }

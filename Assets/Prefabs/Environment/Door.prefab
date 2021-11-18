@@ -123,3 +123,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelLoad: 0
   nextLevel: 0
+  doors: []
+  doorID: 0

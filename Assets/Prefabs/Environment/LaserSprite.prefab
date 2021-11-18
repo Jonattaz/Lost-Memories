@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 7950698669299855794}
   m_Layer: 0
   m_Name: LaserFinal
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 7950698669399036999}
   m_Layer: 0
   m_Name: LaserStart
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 7950698669674204747}
   m_Layer: 0
   m_Name: Laser
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

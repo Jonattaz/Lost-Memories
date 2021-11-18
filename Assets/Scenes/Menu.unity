@@ -2916,7 +2916,7 @@ MonoBehaviour:
   opcoes: {fileID: 606239389}
   menu: {fileID: 636396367}
   credits: {fileID: 1361004431}
-  menuSoundtrack: {fileID: 8300000, guid: b31f0c807dc6af6468d0a1b85b6e26c2, type: 3}
+  menuSoundtrack: {fileID: 8300000, guid: 451f005570339ae4fa5ac404e482a201, type: 3}
 --- !u!4 &1429229613
 Transform:
   m_ObjectHideFlags: 0
