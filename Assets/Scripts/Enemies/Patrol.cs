@@ -77,10 +77,15 @@ public class Patrol : Enemy
     // Método que controla o tiro
     public void Shooting()
     {
-        GameObject tempBullet = Instantiate(bulletPrefab, shotSpawner.position, shotSpawner.rotation);
-        if (!facingRight)
+        if (GameManager.offense)
         {
-            tempBullet.transform.eulerAngles = new Vector3(0, 0, 180);
+
+            GameObject tempBullet = Instantiate(bulletPrefab, shotSpawner.position, shotSpawner.rotation);
+            if (!facingRight)
+            {
+                tempBullet.transform.eulerAngles = new Vector3(0, 0, 180);
+
+            }
 
         }
     }
@@ -89,21 +94,23 @@ public class Patrol : Enemy
     void ChasePlayer()
     {
 
-        if (transform.position.x < target.position.x)
+        if (GameManager.offense)
         {
-            // Enemy is to the left side of the player, so move right
-            rb.velocity = new Vector2(speed, 0);
+            if (transform.position.x < target.position.x)
+            {
+                // Enemy is to the left side of the player, so move right
+                rb.velocity = new Vector2(speed, 0);
 
+
+            }
+            else
+            {
+                // Enemy is to the right side of the player, so move left
+                rb.velocity = new Vector2(-speed, 0);
+
+            }
 
         }
-        else
-        {
-            // Enemy is to the right side of the player, so move left
-            rb.velocity = new Vector2(-speed, 0);
- 
-        }
-
-
     }
 }
 

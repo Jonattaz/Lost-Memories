@@ -22,6 +22,7 @@ public class DialogDisplay : MonoBehaviour
     // GameObject player
     private GameObject player;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +40,7 @@ public class DialogDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X)) 
+        if (Input.GetKeyDown(KeyCode.X) && GameManager.dialogMode) 
         {
             AdvanceConversation();
         
@@ -94,9 +95,6 @@ public class DialogDisplay : MonoBehaviour
         inactiveSpeakerUI.Hide();
     
     }
-
-
-
 
 }
 

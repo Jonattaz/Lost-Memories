@@ -110,7 +110,7 @@ public class Drone : Enemy
             }
         }
 
-        if (attack)
+        if (attack && GameManager.offense)
         {
             if (Mathf.Abs(targetDistance) < attackDistance)
                 rangeCheck = true;

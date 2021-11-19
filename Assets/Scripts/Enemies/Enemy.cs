@@ -22,8 +22,6 @@ public class Enemy : MonoBehaviour
     // Objeto que representa o sprite que aparece quando este objeto for destruido
     public GameObject deathAnimation;
 
-    // PROTECTED É UM TIPO DE PRIVATE, QUE DA PERMISSÃO PARA OS OBJETOS QUE HERDAREM ESTA CLASSE DE USA-LOS TAMBÉM
-
     // Animator
     protected Animator anim;
 

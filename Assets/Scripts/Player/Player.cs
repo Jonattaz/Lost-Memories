@@ -86,11 +86,7 @@ public class Player : MonoBehaviour
     // Representa o gameManager
     GameManager gameManager;
 
-
     int damage;
-
-    // GameObject do dialogo
-    public GameObject dialog;
 
     // Controla se o jogador possui a chave ou não
     [HideInInspector]
@@ -315,12 +311,6 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(TookDamage());
         }
-
-        if (collision.CompareTag("Dialog")) 
-        {
-            dialog.SetActive(true);
-        }
-
         if (collision.CompareTag("GunBox"))
         {
             GameManager.unlockGun = true;
@@ -335,14 +325,6 @@ public class Player : MonoBehaviour
         }
 
  
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Dialog")) 
-        {
-            dialog.SetActive(false);
-        }
     }
 
 

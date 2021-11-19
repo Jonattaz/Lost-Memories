@@ -37,7 +37,11 @@ public class Boss : Enemy
     [SerializeField]
     // Tempo
     float timer;
-    
+
+    [SerializeField]
+    // Representa o laser que impede o jogador de chegar ao final do jogo
+    private GameObject laserFinal;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,7 +53,13 @@ public class Boss : Enemy
     // Update is called once per frame
     protected override void Update()
     {
-       timer -= 1 * Time.deltaTime; 
+        if (health <= 0)
+        {
+            Destroy(laserFinal);
+        }
+
+
+        timer -= 1 * Time.deltaTime; 
         base.Update();
         if (targetDistance < 0)
         {
