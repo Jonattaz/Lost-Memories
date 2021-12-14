@@ -10,6 +10,16 @@ public class ButtonScript : MonoBehaviour
     //variavel para detectar quando a interação com o botão está disponivel
     bool interacao;
 
+    [SerializeField]
+    // Musica que toca quando o ambiente fica claro
+    private AudioClip button;
+
+    int control;
+
+    private void Start()
+    {
+        control = 0;
+    }
 
     private void Update()
     {
@@ -17,6 +27,11 @@ public class ButtonScript : MonoBehaviour
         //Se a interação com o botão estiver disponivel e o jogador apertar X, é chamada a função pra desligar o laser
         if (Input.GetKeyDown(KeyCode.X) && interacao)
         {
+            if(control == 0)
+            {
+                AudioManager.Instance.PlaySFX(button);
+                control++;
+            }
             DisableLaser();
         }
     }

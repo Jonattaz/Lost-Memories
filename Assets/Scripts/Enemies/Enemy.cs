@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     public float speed;
 
     // Váriavel que controla se o inimigo irá atacar ou não
-    public static bool attack;
+    public bool attack;
 
     // Variável que representa a distância dos ataques
     public float attackDistance;
@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     public GameObject coin;
 
     // Objeto que representa o sprite que aparece quando este objeto for destruido
-    public GameObject deathAnimation;
+    //public GameObject deathAnimation;
 
     // Animator
     protected Animator anim;
@@ -39,12 +39,13 @@ public class Enemy : MonoBehaviour
 
     // Sprite Renderer do objeto
     protected SpriteRenderer spriteRend;
+    [SerializeField]
+    private AudioClip damageSound;
 
     // Start is called before the first frame update
     void Awake()
     {
         anim = GetComponent<Animator>();
-        target = FindObjectOfType<Player>().transform;
         rb = GetComponent<Rigidbody2D>();
         spriteRend = GetComponent<SpriteRenderer>();
     }
@@ -52,6 +53,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
+        target = FindObjectOfType<Player>().transform;
         targetDistance = transform.position.x - target.position.x;
     }
 
@@ -71,9 +73,8 @@ public class Enemy : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
+            AudioManager.Instance.PlaySFX(damageSound);
             Instantiate(coin, transform.position, transform.rotation);
-            Instantiate(deathAnimation, transform.position, transform.rotation);
-
             gameObject.SetActive(false);
         }
         else

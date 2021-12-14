@@ -60,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 830351027966146598}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -19.37, y: -1.52, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 2}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 830351027327195286}
   - {fileID: 830351027971163296}
@@ -176,7 +176,6 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5883088150413472123, guid: df7e3953659fc8846bce66f9ce98d9f3,
     type: 3}
   bombRb: {fileID: 1464916078767554695, guid: c582caf38398c1c45b0a175cf639aec3, type: 3}
-  dialog: {fileID: 0}
   key: 0
   talking: 0
 --- !u!95 &830351027966146620

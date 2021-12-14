@@ -8,6 +8,8 @@ public class DarkMusic : MonoBehaviour
     // Musica que toca quando o ambiente fica claro
     private AudioClip darkSoundtrack;
 
+    public GameObject playerLight;
+
     [SerializeField]
     // Bool de permissão
     bool perm;
@@ -15,7 +17,7 @@ public class DarkMusic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {   if(perm)
-        AudioManager.Instance.PlayMusicWithCrossFade(darkSoundtrack, 0.1f);
+        AudioManager.Instance.PlayMusicWithFade(darkSoundtrack, 0.1f);
     }
 
 
@@ -24,7 +26,11 @@ public class DarkMusic : MonoBehaviour
         
         if (collision.gameObject.CompareTag("Player"))
         {
-            AudioManager.Instance.PlayMusicWithCrossFade(darkSoundtrack, 0.1f);
+            if (!playerLight.activeInHierarchy)
+            {
+                playerLight.SetActive(true);
+            }
+            AudioManager.Instance.PlayMusicWithFade(darkSoundtrack, 0.1f);
             Destroy(gameObject);
         }
 

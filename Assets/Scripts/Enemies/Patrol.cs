@@ -25,18 +25,33 @@ public class Patrol : Enemy
     [SerializeField]
     float agroRange;
 
+    [SerializeField]
+    private bool control;
 
- 
+    [SerializeField]
+    private bool deathMode;
+
+
+    private void Start()
+    {
+        deathMode = false;
+        attack = false;
+    }
+
     // Update is called once per frame
     protected override void Update()
-    {
+    { 
+        //Kyogingo
 
+        base.Update();
         // Distance to player
         disToPlayer = Vector2.Distance(transform.position, target.position);
 
+        if (health <= 0)
+        {
+            anim.SetTrigger("Death");
+        }
 
-
-        base.Update();
         if (targetDistance < 0)
         {
             if (!facingRight)
@@ -52,23 +67,22 @@ public class Patrol : Enemy
             }
         }
 
-
-
-        if (attack || agressive)
+        if (deathMode && !control)
         {
-            if (disToPlayer < agroRange)
+            agressive = true;
+        }
+
+        if (attack || agressive && !control) 
+        {
+            if (deathMode)
             {
                 ChasePlayer();
             }
             
-            if (Mathf.Abs(targetDistance) < attackDistance && Time.time > nextFire)
+            if (deathMode && Time.time > nextFire)
             {
-                
-                {
-                    anim.SetTrigger("Shooting");
-                    nextFire = Time.time + fireRate;
-                }
-             
+              Shooting();
+              nextFire = Time.time + fireRate;
             }
         }
 
@@ -79,7 +93,7 @@ public class Patrol : Enemy
     {
         if (GameManager.offense)
         {
-
+            anim.SetTrigger("Shooting");
             GameObject tempBullet = Instantiate(bulletPrefab, shotSpawner.position, shotSpawner.rotation);
             if (!facingRight)
             {
@@ -100,18 +114,32 @@ public class Patrol : Enemy
             {
                 // Enemy is to the left side of the player, so move right
                 rb.velocity = new Vector2(speed, 0);
-
-
+                anim.SetFloat("Speed", Mathf.Abs(speed));
             }
             else
             {
                 // Enemy is to the right side of the player, so move left
                 rb.velocity = new Vector2(-speed, 0);
-
+                anim.SetFloat("Speed", Mathf.Abs(speed));
             }
-
         }
     }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Cam"))
+        {
+            attack = true;
+        }
+
+        if (collision.CompareTag("Player"))
+        {
+            deathMode = true;
+        }
+
+    }
+
 }
 
 

@@ -10,6 +10,7 @@ public class Explosion : MonoBehaviour
     [SerializeField]
     // Variável que controla se a bomba irá dar dano no player ou enemy
     private bool enemyDamaged;
+    public bool playerBomb;
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -34,10 +35,16 @@ public class Explosion : MonoBehaviour
             }
         }
 
-        if (collision.gameObject.CompareTag("Shield"))
+        if (collision.gameObject.CompareTag("Shield") && playerBomb)
         {
             Destroy(this.gameObject);
         }
+
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            Destroy(collision.gameObject);
+        }
+
     }
 
 }

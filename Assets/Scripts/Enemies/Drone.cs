@@ -28,20 +28,31 @@ public class Drone : Enemy
     // Speed of movement
     public float patrolSpeed = 2;
 
+    [SerializeField]
+    private bool deathMode;
 
     bool rangeCheck;
 
     private void Start()
     {
         attack = false;
+        deathMode = false;
+
     }
 
     // Update is called once per frame
     protected override void Update()
     {
         base.Update();
+        if (GameManager.offense)
+        {
+            Movement();
+        }
 
-        Movement();
+        if(health <= 0)
+        {
+            anim.SetTrigger("Death");
+        }
 
     }
 
@@ -49,18 +60,26 @@ public class Drone : Enemy
     // Método que controla o tiro
     public void Shooting()
     {
-        GameObject tempBullet = Instantiate(bulletPrefab, shotSpawner.position, shotSpawner.rotation);
-        if (!facingRight)
+        if (GameManager.offense)
         {
-            tempBullet.transform.eulerAngles = new Vector3(0, 0, 180);
-
+            if (Time.time > nextFire)
+            {
+                anim.SetTrigger("Shooting");
+                GameObject tempBullet = Instantiate(bulletPrefab, shotSpawner.position, shotSpawner.rotation);
+                if (!facingRight)
+                {
+                    tempBullet.transform.eulerAngles = new Vector3(0, 0, 180);
+                }
+            }
         }
     }
 
     // Controla os comportamentos de movimentação drone
     void Movement()
     {
-        if (Mathf.Abs(targetDistance) < attackDistance)
+        anim.SetFloat("Speed", Mathf.Abs(speed));
+
+        if (deathMode)
         {
             attack = true;
         }
@@ -110,10 +129,10 @@ public class Drone : Enemy
             }
         }
 
-        if (attack && GameManager.offense)
+        if (attack && GameManager.offense || deathMode && GameManager.offense)
         {
-            if (Mathf.Abs(targetDistance) < attackDistance)
-                rangeCheck = true;
+             if (Mathf.Abs(targetDistance) < attackDistance)
+                rangeCheck = true; 
 
             if(rangeCheck)
                 transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
@@ -134,7 +153,7 @@ public class Drone : Enemy
                 }
             }
 
-            if (Time.time > nextFire)
+            if (deathMode && Time.time > nextFire)
             {
                     Shooting();
                     nextFire = Time.time + fireRate;
@@ -144,5 +163,20 @@ public class Drone : Enemy
         }
 
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Cam"))
+        {
+            attack = true; 
+        }
+
+        if (collision.CompareTag("Player"))
+        {
+            
+            deathMode = true;
+        }
+    }
+
 
 }

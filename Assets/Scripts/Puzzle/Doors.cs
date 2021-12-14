@@ -39,8 +39,6 @@ public class Doors : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player");
-        playerScript = player.GetComponent<Player>();
         spriteRend = GetComponent<SpriteRenderer>();
         gameManager = GameManager.gameManager;
     }
@@ -48,6 +46,9 @@ public class Doors : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        player = GameObject.Find("Player");
+        playerScript = player.GetComponent<Player>();
+
         // Quando o jogador para de apertar a tecla o teleporte para
         if (Input.GetKeyUp(KeyCode.X))
         {
@@ -71,14 +72,14 @@ public class Doors : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
       {
-        if (collision.collider && playerScript.key && !levelLoad)
+        if (collision.collider && playerScript.key && !levelLoad && collision.gameObject.CompareTag("Player"))
         {
             GetComponent<BoxCollider2D>().enabled = false;
             spriteRend.color = Color.green;
             playerScript.key = false;
         }
         
-        if (collision.collider && levelLoad) 
+        if (collision.collider && levelLoad && collision.gameObject.CompareTag("Player")) 
         {
             gameManager.LoadScene(nextLevel);
             levelLoad = false;

@@ -9,19 +9,18 @@ public class Bullet : MonoBehaviour
     // Variável que controla o dano dado pela bala
     public int damage = 1;
     // Variável que representa o tempo levado para a destruição da bala ao ser instânciada
-    public float destroyTime = 1.5f;
+    public float destroyTime = 0.1f;
 
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(gameObject, destroyTime);
+        Destroy(gameObject, 0.4f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.right * speed * Time.deltaTime) ;
-        
+        transform.Translate(Vector3.right * speed * Time.deltaTime);
     }
 
 
@@ -52,9 +51,26 @@ public class Bullet : MonoBehaviour
         {
             Destroy(this.gameObject);   
         }
+        if (collision.CompareTag("Enemy"))
+        {
+            Destroy(this.gameObject);
+        }
 
-        Destroy(gameObject, 3f);
+        Destroy(gameObject);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Destroy(gameObject);
+
+        if (collision.gameObject.CompareTag("Shield"))
+        {
+            Destroy(this.gameObject);
+        }
+
+    }
+
+
 
 }
 

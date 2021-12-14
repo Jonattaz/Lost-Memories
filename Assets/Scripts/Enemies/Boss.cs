@@ -38,10 +38,6 @@ public class Boss : Enemy
     // Tempo
     float timer;
 
-    [SerializeField]
-    // Representa o laser que impede o jogador de chegar ao final do jogo
-    private GameObject laserFinal;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -53,11 +49,6 @@ public class Boss : Enemy
     // Update is called once per frame
     protected override void Update()
     {
-        if (health <= 0)
-        {
-            Destroy(laserFinal);
-        }
-
 
         timer -= 1 * Time.deltaTime; 
         base.Update();
@@ -76,10 +67,13 @@ public class Boss : Enemy
             }
         }
 
+        if (health <= 1)
+        {
+            anim.SetTrigger("Death");
+        }
 
         if (Mathf.Abs(targetDistance) < attackDistance && Time.time > nextFire && attackMode)
         {
-            //anim.SetTrigger("Shooting");
             if (health <= 100 && health > 100 * 0.5)
             {
                 Shooting();
@@ -92,8 +86,9 @@ public class Boss : Enemy
             nextFire = Time.time + fireRate;
         }
 
-        if (health <= 100 * 0.3 && timer <= 0)
+        if (health <= 100 * 0.7 && timer <= 0)
         {
+            Shooting();
             StartCoroutine(BerserkMode());
             timer = 60;
             
@@ -104,6 +99,7 @@ public class Boss : Enemy
     // Método que controla o tiro
     public void Shooting()
     {
+        anim.SetTrigger("Shoot");
         GameObject tempBullet = Instantiate(bulletPrefab, shotSpawner.position, shotSpawner.rotation);
         if (!facingRight)
         {
@@ -114,7 +110,7 @@ public class Boss : Enemy
 
     public void Bomb()
     {
-
+        anim.SetTrigger("Granade");
         Rigidbody2D tempBomb = Instantiate(bombRb, shotSpawner.position, shotSpawner.rotation);
         if (facingRight)
         {

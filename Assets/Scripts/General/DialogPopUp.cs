@@ -6,11 +6,14 @@ public class DialogPopUp : MonoBehaviour
 {
     // GameObject do dialogo
     public GameObject dialog;
+    
+    // Bool que avança o primeiro dialogo
+    public static bool advanceDialog;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+      
     }
 
     // Update is called once per frame
@@ -23,9 +26,11 @@ public class DialogPopUp : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
-        {
+        { 
+            Player.talking = true;
             dialog.SetActive(true);
             GameManager.dialogMode = true;
+            advanceDialog = true;
         }
 
     }
@@ -37,6 +42,8 @@ public class DialogPopUp : MonoBehaviour
             dialog.SetActive(false);
             GameManager.dialogMode = false;
             GameManager.offense = true;
+            Destroy(dialog);
+            Destroy(gameObject);
         }
     }
 

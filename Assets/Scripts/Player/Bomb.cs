@@ -14,8 +14,6 @@ public class Bomb : MonoBehaviour
         // Destroi a bomba
         Instantiate(explosion, transform.position, transform.rotation);
         Destroy(gameObject);
-
-      
     }
 
 

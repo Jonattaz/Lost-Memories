@@ -7,6 +7,8 @@ public class Console : MonoBehaviour
     // Faz referência ao objeto da global light
     public GameObject globalLight;
 
+    public GameObject playerLight;
+
     // Controla se o jogador entrou em contato com o console de luz
     private bool lightControl;
 
@@ -34,9 +36,10 @@ public class Console : MonoBehaviour
         {
             if (musicControl)
             {
-               AudioManager.Instance.PlayMusicWithCrossFade(lightSoundtrack, 0.1f);
+               AudioManager.Instance.PlayMusicWithFade(lightSoundtrack, 0.3f);
             }
           globalLight.SetActive(true);
+            playerLight.SetActive(false);
         }
         if (Input.GetKeyUp(KeyCode.X)) 
             lightControl = false;

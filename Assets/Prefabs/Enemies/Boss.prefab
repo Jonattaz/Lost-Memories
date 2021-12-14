@@ -210,8 +210,7 @@ MonoBehaviour:
   speed: 0
   attackDistance: 10
   coin: {fileID: 1854709921300822193, guid: ab2980e50f0966d43876f75d0e6502bd, type: 3}
-  deathAnimation: {fileID: 3488367775304295655, guid: 0ec19095db99d67488951cf4849aa43d,
-    type: 3}
+  aud: {fileID: 0}
   bulletPrefab: {fileID: 4524713928194007714, guid: 8aec2b65a727c3a4ea4d11e2e1a22053,
     type: 3}
   Lasers: {fileID: 0}

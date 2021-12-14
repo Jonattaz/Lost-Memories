@@ -41,14 +41,20 @@ public class GameManager : MonoBehaviour
     // Ativa a arma do jogador
     public static bool unlockGun;
 
-    public static bool dialogMode;
+   public static bool dialogMode;
 
     public static bool offense;
+
+    public static bool granadeOn;
+
+    
+    public static bool cameraOff;
 
     // Start is called before the first frame update
     void Awake()
     {
         dialogMode = false;
+        granadeOn = false;
         if (gameManager == null)
         {
             gameManager = this;
@@ -57,7 +63,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
+       
         DontDestroyOnLoad(gameObject);
         
     }
